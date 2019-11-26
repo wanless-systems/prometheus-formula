@@ -100,7 +100,7 @@ prometheus-config-args-{{ name }}-all:
                 {%- set args_file = prometheus.pkg.get(name, {}).get('args_file', False) %}
                 {%- if not args_file %}
                     {%- set args_file = prometheus.dir.args | path_join(name) %}
-                    {%- if not grains.os_family in ['Debian'] %}
+                    {%- if not grains.os_family in ['Debian', 'RedHat'] %}
                         {%- set args_file = "{}.sh".format(args_file) %}
                     {%- endif %}
                 {%- endif %}
