@@ -41,7 +41,7 @@ prometheus-service-running-{{ name }}-service-unmasked:
       - file: prometheus-config-file-var-file-directory
                 {%- endif %}
     - onlyif:
-       -  systemctl list-units | grep {{ service_name }} >/dev/null 2>&1
+       -  systemctl list-unit-files | grep {{ service_name }} >/dev/null 2>&1
             {%- endif %}
 
 prometheus-service-running-{{ name }}-service-running:
