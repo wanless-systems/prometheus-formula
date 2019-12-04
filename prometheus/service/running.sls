@@ -58,7 +58,7 @@ prometheus-service-running-{{ name }}-service-running:
             {%- endif %}
             {%- if grains.kernel|lower == 'linux' %}
       - service: prometheus-service-running-{{ name }}-service-unmasked
-    - onlyif: systemctl list-unit_files | grep {{ service_name }} >/dev/null 2>&1
+    - onlyif: systemctl list-unit-files | grep {{ service_name }} >/dev/null 2>&1
             {%- endif %}
 
         {%- endif %}
