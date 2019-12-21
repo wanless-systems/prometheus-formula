@@ -108,8 +108,11 @@ prometheus-config-args-{{ name }}-all:
 prometheus-config-args-{{ name }}-file-managed:
   file.managed:
     - name: {{ args_file }}
-    - contents: |
-        PROMETHEUS_OPTS="{{ concat_args(args) }}"
+    {%- if name in ['node_exporter'] and grains.os_family in ['RedHat']  %}
+    - contents: NODE_EXPORTER_OPTS="{{ concat_args(args) }}"
+    {%- else %}
+    - contents: PROMETHEUS_OPTS="{{ concat_args(args) }}"
+    {%- endif %}
     - watch_in:
       - service: prometheus-service-running-{{ name }}-service-running
                 {%- if prometheus.dir.args %}
